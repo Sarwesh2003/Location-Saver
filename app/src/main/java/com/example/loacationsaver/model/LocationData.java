@@ -1,22 +1,16 @@
 package com.example.loacationsaver.model;
 
+import androidx.annotation.NonNull;
+
 public class LocationData {
-    int srno;
     String lat,lang;
 
-    public LocationData(int srno, String lat, String lang) {
-        this.srno = srno;
+    public LocationData(String lat, String lang) {
         this.lat = lat;
         this.lang = lang;
     }
 
-    public int getSrno() {
-        return srno;
-    }
 
-    public void setSrno(int srno) {
-        this.srno = srno;
-    }
 
     public String getLat() {
         return lat;
@@ -34,8 +28,9 @@ public class LocationData {
         this.lang = lang;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "(" + srno +", " + lat + ", " + lang + ')';
+        return lat + "," + lang;
     }
 }

@@ -2,6 +2,7 @@ package com.example.loacationsaver.model;
 
 
 import android.database.Cursor;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.loacationsaver.model.db.LocationDBAdapter;
@@ -19,7 +20,10 @@ public class LocationModel  {
     public boolean saveLocation(String lat,String lang) throws Exception{
         boolean isSuccess=db.insert(lat,lang);
         if(!isSuccess){
-            throw new Exception("Something went wrong");
+            throw new Exception("Error Saving");
+        }
+        else{
+            refresh();
         }
         return isSuccess;
     }
@@ -28,16 +32,23 @@ public class LocationModel  {
             return this.locations;
         }
         else{
+            refresh();
             throw new Exception("No Records Found");
         }
     }
-    public boolean DeleteLocation(int SrNo) throws  Exception{
-        boolean isSuccess= db.Delete(SrNo);
+    public boolean Delete(String lat, String lang) throws  Exception{
+        boolean isSuccess= db.Delete(lat,lang);
         if(!isSuccess){
-            throw new Exception("Something went wrong");
+            throw new Exception("Error while deleting");
+        }
+        else{
+            refresh();
         }
         return isSuccess;
     }
 
+    public void refresh(){
+        locations=this.db.getSavedLocation();
+    }
 
 }

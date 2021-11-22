@@ -5,26 +5,25 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 
 import androidx.annotation.Nullable;
 
-public class LocationDatabaseContract extends SQLiteOpenHelper {
+public class LocationDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME="LocationSaverDatabase";
-    public static final String COLUMN_SR_NO="SrNo";
     public static final String COLUMN_LATITUDE="latitude";
     public static final String COLUMN_LONGITUDE="longitude";
     private static  final String CREATE_TABLE="CREATE TABLE "+TABLE_NAME + "("+
-            COLUMN_SR_NO +" INTEGER PRIMARY KEY, " +
             COLUMN_LATITUDE +" TEXT, " +
             COLUMN_LONGITUDE +" TEXT )";
     private static final String DELETE_TABLE="DROP TABLE IF EXISTS "+ TABLE_NAME;
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "LocationSaver.db";
 
-    public LocationDatabaseContract(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public LocationDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -32,7 +31,7 @@ public class LocationDatabaseContract extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        Log.d(TAG,"Inside onCreate");
+        Log.d("Success","Inside onCreate");
     }
 
     @Override
@@ -40,6 +39,4 @@ public class LocationDatabaseContract extends SQLiteOpenHelper {
         db.execSQL(DELETE_TABLE);
         onCreate(db);
     }
-
-
 }
