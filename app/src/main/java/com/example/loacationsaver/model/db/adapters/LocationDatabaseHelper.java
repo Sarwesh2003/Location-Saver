@@ -1,4 +1,4 @@
-package com.example.loacationsaver.model.db;
+package com.example.loacationsaver.model.db.adapters;
 
 import static android.content.ContentValues.TAG;
 

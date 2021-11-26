@@ -1,29 +1,23 @@
-package com.example.loacationsaver.model.db;
+package com.example.loacationsaver.model.db.adapters;
 
-import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteQuery;
-import android.util.Log;
 
-import com.example.loacationsaver.model.LocationData;
+import com.example.loacationsaver.model.db.LocationData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LocationDBAdapter {
-   private Context context;
-   private SQLiteDatabase database;
+    private final SQLiteDatabase database;
    private static LocationDBAdapter instance;
 
 
    private LocationDBAdapter(Context context){
-       this.context=context;
-       database=new LocationDatabaseHelper(this.context, LocationDatabaseHelper.DATABASE_NAME,null, LocationDatabaseHelper.DATABASE_VERSION).getWritableDatabase();
+       database=new LocationDatabaseHelper(context, LocationDatabaseHelper.DATABASE_NAME,null, LocationDatabaseHelper.DATABASE_VERSION).getWritableDatabase();
    }
    public static LocationDBAdapter getLocationInstance(Context context){
        if(instance==null){

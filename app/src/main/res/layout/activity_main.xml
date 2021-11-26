@@ -1,56 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/show"
-        android:layout_width="364dp"
-        android:layout_height="370dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savelocation"
-        app:layout_constraintVertical_bias="0.605">
-
-    </ListView>
-
-    <Button
-        android:id="@+id/savelocation"
-        android:layout_width="223dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="32dp"
-        android:text="Save Current Location"
-        app:layout_constraintEnd_toEndOf="@+id/tv_lang"
-        app:layout_constraintStart_toStartOf="@+id/tv_lang"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lang" />
-
-    <EditText
-        android:id="@+id/tv_lat"
+    <TextView
+        android:id="@+id/title_mainscreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="serif"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 
-    <EditText
-        android:id="@+id/tv_lang"
+    <RelativeLayout
+        android:id="@+id/layout_map"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/tv_lat"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_lat"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lat" />
+        android:layout_height="500dp"
+        android:layout_below="@+id/title_mainscreen"
+        android:background="@drawable/round"
+        android:layout_margin="10dp"
+        android:elevation="12dp"
+        android:translationZ="12dp">
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/recenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="10dp"
+                android:backgroundTint="#C5C5C5"
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/re_center"
+                android:src="@drawable/accurate" />
+
+        </fragment>
+    </RelativeLayout>
+
+</RelativeLayout>

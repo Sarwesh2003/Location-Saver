@@ -1,19 +1,14 @@
-package com.example.loacationsaver.model;
+package com.example.loacationsaver.model.db;
 
 
-import android.database.Cursor;
-import android.util.Log;
-import android.widget.Toast;
+import com.example.loacationsaver.model.db.adapters.LocationDBAdapter;
 
-import com.example.loacationsaver.model.db.LocationDBAdapter;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class LocationModel  {
+public class DatabaseModel {
     LocationDBAdapter db;
     List<String> locations;
-    public LocationModel(LocationDBAdapter adapter){
+    public DatabaseModel(LocationDBAdapter adapter){
         this.db=adapter;
         locations=db.getSavedLocation();
     }

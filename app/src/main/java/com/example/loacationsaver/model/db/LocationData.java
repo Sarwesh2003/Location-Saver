@@ -1,4 +1,4 @@
-package com.example.loacationsaver.model;
+package com.example.loacationsaver.model.db;
 
 import androidx.annotation.NonNull;
 

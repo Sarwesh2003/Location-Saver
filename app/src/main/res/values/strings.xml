@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">LoacationSaver</string>
+    <string name="app_name">Location Saver</string>
+    <string name="app_title">DISCOVER\nSAVE\nNAVIGATE\nENJOY</string>
+    <string name="app_subtitle">Save Realtime Locations, Navigate to any Location</string>
+    <string name="location_rationale">Location Permission Is Required To Save The Location</string>
+    <string name="re_center">Re-Center</string>
 </resources>
