@@ -2,53 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/title_mainscreen"
-        android:layout_width="wrap_content"
+    <include layout="@layout/toolbar_cutom" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="serif"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
-        android:textStyle="bold|italic" />
+        android:layout_below="@+id/toolbar">
 
-    <RelativeLayout
-        android:id="@+id/layout_map"
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
-        android:layout_below="@+id/title_mainscreen"
-        android:background="@drawable/round"
-        android:layout_margin="10dp"
-        android:elevation="12dp"
-        android:translationZ="12dp">
-        <fragment
-            android:id="@+id/map_fragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/recenter"
+            <RelativeLayout
+                android:id="@+id/layout_map"
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round"
+                android:elevation="12dp"
+                android:translationZ="12dp">
+
+                <fragment
+                    android:id="@+id/map_fragment"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/recenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#C5C5C5"
+                        android:contentDescription="@string/re_center"
+                        android:src="@drawable/accurate"
+                        app:rippleColor="@color/white" />
+
+                </fragment>
+            </RelativeLayout>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="10dp"
-                android:backgroundTint="#C5C5C5"
-                app:rippleColor="@color/white"
-                android:contentDescription="@string/re_center"
-                android:src="@drawable/accurate" />
+                android:layout_below="@+id/layout_map"
+                android:text="@string/saved_locations_string"
+                android:fontFamily="serif"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-        </fragment>
-    </RelativeLayout>
-
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

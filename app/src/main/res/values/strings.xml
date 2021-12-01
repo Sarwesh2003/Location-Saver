@@ -4,4 +4,8 @@
     <string name="app_subtitle">Save Realtime Locations, Navigate to any Location</string>
     <string name="location_rationale">Location Permission Is Required To Save The Location</string>
     <string name="re_center">Re-Center</string>
+    <string name="nav_widget_option">App Widget</string>
+    <string name="nav_about_us_menu">About Us</string>
+    <string name="share">Share</string>
+    <string name="saved_locations_string">Saved Locations</string>
 </resources>
