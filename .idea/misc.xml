@@ -4,12 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/accurate.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/bottom_button_shape.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/button_bg.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/button_border.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/menu.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/drawable/round.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/font/baloo_bhai.xml" value="0.1640625" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/bottom_sheet_design.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/bottom_sheet_view_locations.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.259375" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/listview.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/splashscreen.xml" value="0.264" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/toolbar_custom.xml" value="0.264" />

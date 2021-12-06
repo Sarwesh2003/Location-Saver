@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi;
 import com.example.loacationsaver.View.MainAcitivtyView.ViewImplementor;
 import com.example.loacationsaver.model.db.DatabaseModel;
 import com.example.loacationsaver.model.locations.LocationModel;
+import com.google.android.gms.maps.model.LatLng;
 
 public class ActivityController implements ActivityControllerInterface {
 
@@ -43,15 +44,16 @@ public class ActivityController implements ActivityControllerInterface {
     }
 
     @Override
-    public void OnClickSaveLocation(String lat, String lang) {
+    public void OnClickSaveLocation(LatLng latLng) {
         try {
-            boolean isSuccess=model.saveLocation(lat,lang);
+            boolean isSuccess=model.saveLocation(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude), this.GetAddress(latLng));
             if(isSuccess){
                 view.UpdateView(model.getAllSavedLocation());
                 view.ShowSuccess("Successful");
             }
         } catch (Exception e) {
-            view.ShowError(e.getMessage());
+            Log.d("Error",e.getMessage());
+            view.ShowError("Something went wrong");
         }
     }
 
@@ -66,5 +68,14 @@ public class ActivityController implements ActivityControllerInterface {
         } catch (Exception e) {
             view.ShowError(e.getMessage());
         }
+    }
+
+    @Override
+    public LatLng GetLatLng() {
+        return locationModel.GetLatLng();
+    }
+
+    public String GetAddress(LatLng latLng){
+        return locationModel.GetAddress(latLng);
     }
 }

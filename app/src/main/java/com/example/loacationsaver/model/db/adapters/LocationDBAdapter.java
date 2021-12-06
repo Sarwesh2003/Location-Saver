@@ -26,11 +26,12 @@ public class LocationDBAdapter {
        return instance;
    }
 
-    public boolean insert(String lat, String lang) throws Exception{
-       if(!CheckIfExitsData(lat,lang)){
+    public boolean insert(String lat, String lang, String address) throws Exception{
+       if(!CheckIfExitsData(lat,lang,address)){
            ContentValues contentValues=new ContentValues();
            contentValues.put(LocationDatabaseHelper.COLUMN_LATITUDE,lat);
            contentValues.put(LocationDatabaseHelper.COLUMN_LONGITUDE,lang);
+           contentValues.put(LocationDatabaseHelper.COLUMN_ADDRESS,address);
            return database.insert(LocationDatabaseHelper.TABLE_NAME,null,contentValues)>0;
        }else{
            throw new Exception("Location Already Saved");
@@ -54,11 +55,11 @@ public class LocationDBAdapter {
         return database.delete(LocationDatabaseHelper.TABLE_NAME,LocationDatabaseHelper.COLUMN_LATITUDE+" LIKE ? AND "+
                 LocationDatabaseHelper.COLUMN_LONGITUDE+" LIKE ? ",new String[]{lat,lang})>0;
     }
-
-    public boolean CheckIfExitsData(String lat,String lang){
-        String Query = "Select * from " + LocationDatabaseHelper.TABLE_NAME + " WHERE " +
-                LocationDatabaseHelper.COLUMN_LONGITUDE+ " = '" + lang+"' AND " +
-                LocationDatabaseHelper.COLUMN_LATITUDE +" = '"+lat+"'";
+    public boolean CheckIfExitsData(String lat,String lang, String address){
+        String Query = "SELECT * FROM "+LocationDatabaseHelper.TABLE_NAME+ " WHERE "+
+                LocationDatabaseHelper.COLUMN_LATITUDE +" = " + lat +" AND " +
+                LocationDatabaseHelper.COLUMN_LONGITUDE +" = " + lang +" AND "+
+                LocationDatabaseHelper.COLUMN_ADDRESS +" = '" + address +"'";
             Cursor cursor = database.rawQuery(Query, null);
             if(cursor.getCount() <= 0){
                 cursor.close();

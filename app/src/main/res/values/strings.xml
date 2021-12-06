@@ -8,4 +8,13 @@
     <string name="nav_about_us_menu">About Us</string>
     <string name="share">Share</string>
     <string name="saved_locations_string">Saved Locations</string>
+    <string name="main_activity_subtitle">Your Saved Locations Will Appear Here</string>
+    <string name="view_location_btn_title">View Location</string>
+    <string name="save_location_btn_title">Save Location</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_location_title">Your Locations</string>
+    <string name="address">Address</string>
+    <string name="popup_menu_CD">Popup Menu</string>
+    <string name="widget_cd">Widget</string>
 </resources>

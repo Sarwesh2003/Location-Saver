@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,6 +31,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
+import java.util.Locale;
 
 public class LocationModel {
     Context context;
@@ -116,4 +121,32 @@ public class LocationModel {
         }, null);
     }
 
+    public LatLng GetLatLng() {
+        return marker.getPosition();
+    }
+
+    public String GetAddress(LatLng latLng){
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder();
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strReturnedAddress.append(returnedAddress.getLocality()).append("\n");
+                strReturnedAddress.append(returnedAddress.getPostalCode()).append("\n");
+                strReturnedAddress.append(returnedAddress.getCountryName());
+                strAdd = strReturnedAddress.toString();
+            } else {
+                return "No Address Found";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Something went wrong";
+        }
+        return strAdd;
+    }
 }

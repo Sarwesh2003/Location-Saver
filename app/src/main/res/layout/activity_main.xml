@@ -7,56 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/toolbar_cutom" />
+    <include layout="@layout/toolbar_custom" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar">
+    <RelativeLayout
+        android:id="@+id/layout_map"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="10dp"
+        android:background="@drawable/round"
+        android:elevation="12dp">
 
-        <RelativeLayout
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
 
-            <RelativeLayout
-                android:id="@+id/layout_map"
-                android:layout_width="wrap_content"
-                android:layout_height="500dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/round"
-                android:elevation="12dp"
-                android:translationZ="12dp">
-
-                <fragment
-                    android:id="@+id/map_fragment"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true">
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/recenter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|bottom"
-                        android:layout_margin="10dp"
-                        android:backgroundTint="#C5C5C5"
-                        android:contentDescription="@string/re_center"
-                        android:src="@drawable/accurate"
-                        app:rippleColor="@color/white" />
-
-                </fragment>
-            </RelativeLayout>
-            <TextView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/recenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_map"
-                android:text="@string/saved_locations_string"
-                android:fontFamily="serif"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                android:foregroundTint="@color/white"
+                android:contentDescription="@string/re_center"
+                android:src="@drawable/accurate"
+                app:rippleColor="@color/white" />
+        </fragment>
 
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/view_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/button"
+                android:text="@string/view_location_btn_title"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/save_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/button"
+                android:text="@string/save_location_btn_title"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

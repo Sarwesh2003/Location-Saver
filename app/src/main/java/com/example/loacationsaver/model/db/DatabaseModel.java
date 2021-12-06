@@ -12,8 +12,8 @@ public class DatabaseModel {
         this.db=adapter;
         locations=db.getSavedLocation();
     }
-    public boolean saveLocation(String lat,String lang) throws Exception{
-        boolean isSuccess=db.insert(lat,lang);
+    public boolean saveLocation(String lat,String lang, String address) throws Exception{
+        boolean isSuccess=db.insert(lat,lang,address);
         if(!isSuccess){
             throw new Exception("Error Saving");
         }

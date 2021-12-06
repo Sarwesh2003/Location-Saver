@@ -1,38 +1,28 @@
 package com.example.loacationsaver.View.MainAcitivtyView;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.media.Image;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.loacationsaver.R;
+import com.example.loacationsaver.View.BottomSheetView.BottomSheetFragment;
 import com.example.loacationsaver.controller.MainActivityController.ActivityController;
 import com.example.loacationsaver.model.db.DatabaseModel;
 import com.example.loacationsaver.model.db.adapters.LocationDBAdapter;
 import com.example.loacationsaver.model.locations.LocationModel;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -40,6 +30,7 @@ import java.util.List;
 public class ViewImplementor implements MainActivityView {
 
     View root;
+    ExtendedFloatingActionButton btn_view_location,btn_save_location;
     FloatingActionButton refresh;
     ActivityController controller;
     Toolbar toolbar;
@@ -59,14 +50,25 @@ public class ViewImplementor implements MainActivityView {
     public void initView() {
         UI();
         controller.onViewLoaded();
-        menu_btn = (ImageButton) root.findViewById(R.id.menu_btn);
-        widget_btn=(ImageButton) root.findViewById(R.id.widget);
-        refresh = (FloatingActionButton) root.findViewById(R.id.recenter);
-
+        menu_btn =  root.findViewById(R.id.menu_btn);
+        widget_btn= root.findViewById(R.id.widget);
+        refresh =  root.findViewById(R.id.recenter);
+        btn_save_location= root.findViewById(R.id.save_location);
+        btn_view_location= root.findViewById(R.id.view_location);
         //Handle Click Events
-        menu_btn.setOnClickListener(v -> CreatPopUpMenu());
+        menu_btn.setOnClickListener(v -> CreatePopUpMenu());
         refresh.setOnClickListener(v -> controller.GetLocationUpdates());
-        widget_btn.setOnClickListener(v -> {ShowDialogue("The Feature is coming soon");});
+        widget_btn.setOnClickListener(v -> ShowDialogue("The Feature is coming soon"));
+        btn_save_location.setOnClickListener(v -> controller.OnClickSaveLocation(controller.GetLatLng()));
+        btn_view_location.setOnClickListener(v -> {
+            controller.GetAddress(controller.GetLatLng());
+            ShowBottomSheetDialogue(root.getContext());
+        });
+    }
+
+    private void ShowBottomSheetDialogue(Context context) {
+        BottomSheetFragment bottomSheet=new BottomSheetFragment();
+        bottomSheet.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheet.getTag());
     }
 
     public void ShowDialogue(String msg) {
@@ -86,7 +88,7 @@ public class ViewImplementor implements MainActivityView {
 
     @Override
     public Toolbar getToolbar() {
-        toolbar = (Toolbar) root.findViewById(R.id.toolbar);
+        toolbar = root.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         return toolbar;
     }
@@ -131,7 +133,7 @@ public class ViewImplementor implements MainActivityView {
     }
 
     @Override
-    public void ShareApp() {
+    public void ShareLocation() {
     }
 
     @Override
@@ -139,9 +141,8 @@ public class ViewImplementor implements MainActivityView {
     }
 
     @Override
-    public void CreatPopUpMenu() {
-        ImageButton btn = (ImageButton) root.findViewById(R.id.menu_btn);
-        PopupMenu popup = new PopupMenu(root.getContext(), btn);
+    public void CreatePopUpMenu() {
+        PopupMenu popup = new PopupMenu(root.getContext(), menu_btn);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_items_custom, popup.getMenu());
         popup.show();

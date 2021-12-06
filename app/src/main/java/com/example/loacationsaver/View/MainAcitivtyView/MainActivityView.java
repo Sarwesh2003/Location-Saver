@@ -11,8 +11,8 @@ public interface MainActivityView extends ViewInterface {
     void ShowError(String error);
     void ShowSuccess(String SuccessMsg);
     void UI();
-    void CreatPopUpMenu();
-    void ShareApp();
+    void CreatePopUpMenu();
+    void ShareLocation();
     void AboutUs();
     Toolbar getToolbar();
 }
