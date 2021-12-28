@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button">#4169E1</color>
+    <color name="Divider">#BDBDBD</color>
 </resources>

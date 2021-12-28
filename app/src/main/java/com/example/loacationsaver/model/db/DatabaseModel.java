@@ -1,7 +1,9 @@
 package com.example.loacationsaver.model.db;
 
 
-import com.example.loacationsaver.model.db.adapters.LocationDBAdapter;
+import android.database.Cursor;
+
+import com.example.loacationsaver.model.adapters.LocationDBAdapter;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class DatabaseModel {
     List<String> locations;
     public DatabaseModel(LocationDBAdapter adapter){
         this.db=adapter;
-        locations=db.getSavedLocation();
+        //locations=db.getSavedLocation();
     }
     public boolean saveLocation(String lat,String lang, String address) throws Exception{
         boolean isSuccess=db.insert(lat,lang,address);
@@ -18,7 +20,7 @@ public class DatabaseModel {
             throw new Exception("Error Saving");
         }
         else{
-            refresh();
+            //refresh();
         }
         return isSuccess;
     }
@@ -27,7 +29,7 @@ public class DatabaseModel {
             return this.locations;
         }
         else{
-            refresh();
+            //refresh();
             throw new Exception("No Records Found");
         }
     }
@@ -37,13 +39,17 @@ public class DatabaseModel {
             throw new Exception("Error while deleting");
         }
         else{
-            refresh();
+            //refresh();
         }
         return isSuccess;
     }
 
-    public void refresh(){
-        locations=this.db.getSavedLocation();
+//    public void refresh(){
+//        locations=this.db.getSavedLocation();
+//    }
+
+    public Cursor GetCursorForAllData(){
+        return db.GetCursor();
     }
 
 }

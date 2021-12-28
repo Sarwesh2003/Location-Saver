@@ -1,11 +1,8 @@
-package com.example.loacationsaver.model.db.adapters;
-
-import static android.content.ContentValues.TAG;
+package com.example.loacationsaver.model.adapters;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 

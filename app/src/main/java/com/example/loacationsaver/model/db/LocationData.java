@@ -2,35 +2,26 @@ package com.example.loacationsaver.model.db;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class LocationData {
-    String lat,lang;
+    LatLng latlang;
 
-    public LocationData(String lat, String lang) {
-        this.lat = lat;
-        this.lang = lang;
+    public LocationData(LatLng lang) {
+        this.latlang = lang;
     }
 
-
-
-    public String getLat() {
-        return lat;
+    public LatLng getLatlang() {
+        return latlang;
     }
 
-    public void setLat(String lat) {
-        this.lat = lat;
-    }
-
-    public String getLang() {
-        return lang;
-    }
-
-    public void setLang(String lang) {
-        this.lang = lang;
+    public void setLatlang(LatLng latlang) {
+        this.latlang = latlang;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return lat + "," + lang;
+        return latlang.latitude + "," + latlang.longitude;
     }
 }

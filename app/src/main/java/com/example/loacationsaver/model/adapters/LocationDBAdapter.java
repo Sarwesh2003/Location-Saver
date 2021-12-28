@@ -1,4 +1,4 @@
-package com.example.loacationsaver.model.db.adapters;
+package com.example.loacationsaver.model.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,7 +16,7 @@ public class LocationDBAdapter {
    private static LocationDBAdapter instance;
 
 
-   private LocationDBAdapter(Context context){
+   public LocationDBAdapter(Context context){
        database=new LocationDatabaseHelper(context, LocationDatabaseHelper.DATABASE_NAME,null, LocationDatabaseHelper.DATABASE_VERSION).getWritableDatabase();
    }
    public static LocationDBAdapter getLocationInstance(Context context){
@@ -38,18 +38,18 @@ public class LocationDBAdapter {
        }
 
     }
-    public List<String> getSavedLocation(){
+    /*public List<String> getSavedLocation(){
         List<String> locations=new ArrayList<>();
-        Cursor cursor=database.query(LocationDatabaseHelper.TABLE_NAME,new String[]{LocationDatabaseHelper.COLUMN_LATITUDE, LocationDatabaseHelper.COLUMN_LONGITUDE},null,null,null,null,null);
+        Cursor cursor=database.query(LocationDatabaseHelper.TABLE_NAME,new String[]{LocationDatabaseHelper.COLUMN_ADDRESS},null,null,null,null,null);
         if(cursor!=null && cursor.getCount()>0){
             while(cursor.moveToNext()){
-                LocationData data = new LocationData(cursor.getString(0),cursor.getString(1));
+                String data = cursor.getString(2);
                 locations.add(String.valueOf(data));
             }
         }
         Objects.requireNonNull(cursor).close();
         return locations;
-    }
+    }*/
 
     public boolean Delete(String lat, String lang){
         return database.delete(LocationDatabaseHelper.TABLE_NAME,LocationDatabaseHelper.COLUMN_LATITUDE+" LIKE ? AND "+
@@ -67,5 +67,14 @@ public class LocationDBAdapter {
             }
             cursor.close();
             return true;
+    }
+
+    public Cursor GetCursor(){
+       String query="SELECT * FROM "+LocationDatabaseHelper.TABLE_NAME;
+       Cursor cursor=null;
+       if(database!=null){
+           cursor=database.rawQuery(query,null);
+       }
+       return cursor;
     }
 }

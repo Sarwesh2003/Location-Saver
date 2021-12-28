@@ -17,10 +17,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.loacationsaver.R;
-import com.example.loacationsaver.View.BottomSheetView.BottomSheetFragment;
-import com.example.loacationsaver.controller.MainActivityController.ActivityController;
+import com.example.loacationsaver.ListFragment;
+import com.example.loacationsaver.controller.MainActivityController.MainActivityController;
 import com.example.loacationsaver.model.db.DatabaseModel;
-import com.example.loacationsaver.model.db.adapters.LocationDBAdapter;
+import com.example.loacationsaver.model.adapters.LocationDBAdapter;
 import com.example.loacationsaver.model.locations.LocationModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +32,7 @@ public class ViewImplementor implements MainActivityView {
     View root;
     ExtendedFloatingActionButton btn_view_location,btn_save_location;
     FloatingActionButton refresh;
-    ActivityController controller;
+    MainActivityController controller;
     Toolbar toolbar;
     ImageButton menu_btn,widget_btn;
 
@@ -43,7 +43,7 @@ public class ViewImplementor implements MainActivityView {
         //List<String> list;
         DatabaseModel model = new DatabaseModel(LocationDBAdapter.getLocationInstance(context));
         LocationModel locationModel = new LocationModel(root.getContext());
-        controller = new ActivityController(model, this, locationModel);
+        controller = new MainActivityController(model, this, locationModel);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ViewImplementor implements MainActivityView {
     }
 
     private void ShowBottomSheetDialogue(Context context) {
-        BottomSheetFragment bottomSheet=new BottomSheetFragment();
+        ListFragment bottomSheet=new ListFragment();
         bottomSheet.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheet.getTag());
     }
 

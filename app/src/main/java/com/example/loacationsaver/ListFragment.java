@@ -1,24 +1,30 @@
-package com.example.loacationsaver.View.BottomSheetView;
+package com.example.loacationsaver;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.loacationsaver.R;
+import com.example.loacationsaver.View.LocationListView.LocationListView;
+import com.example.loacationsaver.model.adapters.ShowLocationsAdapter;
+import com.example.loacationsaver.model.db.DatabaseModel;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class BottomSheetFragment extends BottomSheetDialogFragment {
+import java.util.ArrayList;
+
+public class ListFragment extends BottomSheetDialogFragment {
 
     RecyclerView list;
-
+    ShowLocationsAdapter adapter;
+    DatabaseModel model;
+    ArrayList<String> address;
+    ArrayList<LatLng> latlang;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,9 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        list=view.findViewById(R.id.locationList);
+        LocationListView bottomSheetView=new LocationListView(getContext(),view,savedInstanceState,this);
+        bottomSheetView.InitiallizeUI();
 
     }
+
 }

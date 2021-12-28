@@ -20,7 +20,8 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:elevation="4dp"
         android:src="@drawable/menu"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/popup_menu_CD" />
 
     <TextView
         android:id="@+id/title_mainscreen"
@@ -46,6 +47,7 @@
         android:layout_alignParentEnd="true"
         android:elevation="4dp"
         android:src="@drawable/nav_widget_option_icon"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/widget_cd" />
 
 </androidx.appcompat.widget.Toolbar>

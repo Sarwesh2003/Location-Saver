@@ -24,12 +24,11 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
+
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
@@ -103,16 +102,16 @@ public class LocationModel {
 
     public void KeepUpdatingLocation() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("Error here","Returning form permission");
+            Log.d("Error here", "Returning form permission");
             return;
         }
-        Log.d("Error","Near Callback");
+        Log.d("Error", "Near Callback");
         client.requestLocationUpdates(getConfig(), new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
                 supportMapFragment.getMapAsync(googleMap -> {
-                    for(Location locationUpdate:locationResult.getLocations()){
+                    for (Location locationUpdate : locationResult.getLocations()) {
                         LatLng latLng = new LatLng(locationUpdate.getLatitude(), locationUpdate.getLongitude());
                         AddMarkerToPos(latLng, googleMap);
                     }
@@ -125,7 +124,7 @@ public class LocationModel {
         return marker.getPosition();
     }
 
-    public String GetAddress(LatLng latLng){
+    public String GetAddress(LatLng latLng) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
@@ -136,9 +135,6 @@ public class LocationModel {
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
-                strReturnedAddress.append(returnedAddress.getLocality()).append("\n");
-                strReturnedAddress.append(returnedAddress.getPostalCode()).append("\n");
-                strReturnedAddress.append(returnedAddress.getCountryName());
                 strAdd = strReturnedAddress.toString();
             } else {
                 return "No Address Found";
@@ -149,4 +145,5 @@ public class LocationModel {
         }
         return strAdd;
     }
+
 }
