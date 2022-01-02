@@ -2,6 +2,8 @@ package com.example.loacationsaver.model.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +76,8 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
             googleMap.getUiSettings().setAllGesturesEnabled(false);
             holder.mapview.onResume();
         });
+
+        //Delete Button Click Listener
         holder.delete.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage(context.getResources().getString(R.string.do_you_really_want_to_delete));
@@ -85,9 +89,17 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
                     Delete(instance,holder.getAdapterPosition());
                 }
             });
-
             AlertDialog alert = builder.create();
             alert.show();
+        });
+
+        //Share Button Click Listener
+        holder.share.setOnClickListener(v -> {
+            StartShare(instance);
+        });
+
+        holder.nav.setOnClickListener(v -> {
+            StartNavigation(instance);
         });
     }
 
@@ -145,9 +157,8 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView address;
-        SupportMapFragment supportMapFragment;
         MapView mapview;
-        ImageButton delete;
+        ImageButton delete,share,nav;
         OnLocationClickListener onLocationClickListener;
 
 
@@ -155,9 +166,10 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
             super(itemView);
             this.onLocationClickListener=onLocationClickListener;
             address = itemView.findViewById(R.id.show_address);
-            //supportMapFragment = ((SupportMapFragment) ((FragmentActivity) itemView.getContext()).getSupportFragmentManager().findFragmentById(R.id.map_preview_fragment));
             mapview=(MapView)itemView.findViewById(R.id.map_preview_fragment);
             delete=itemView.findViewById(R.id.delete);
+            share=itemView.findViewById(R.id.share);
+            nav=itemView.findViewById(R.id.nav);
             RelativeLayout rl = itemView.findViewById(R.id.back);
             rl.setClipToOutline(true);
             mapview.setClickable(false);
@@ -171,5 +183,19 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
     }
     public interface OnLocationClickListener{
         void onLocationClick(int position);
+    }
+
+    private void StartShare(LatLng instance){
+        String uri = "http://maps.google.com/maps?daddr=" +instance.latitude+","+instance.longitude;
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String ShareSub = "Follow this link to get direction to my saved location\n";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, ShareSub+uri);
+        context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    private void StartNavigation(LatLng instance) {
+        String uri = "http://maps.google.com/maps?daddr=" +instance.latitude+","+instance.longitude;
+        context.startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse(uri)));
     }
 }

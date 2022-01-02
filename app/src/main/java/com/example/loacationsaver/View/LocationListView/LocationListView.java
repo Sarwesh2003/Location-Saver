@@ -1,6 +1,8 @@
 package com.example.loacationsaver.View.LocationListView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +85,11 @@ public class LocationListView implements ShowLocationsAdapter.OnLocationClickLis
 
     @Override
     public void onLocationClick(int position) {
-//        bottomSheetFragment.dismiss();
+        LatLng instance=latlang.get(position);
+        String uri = "geo:" + instance.latitude + ","
+                +instance.longitude + "?q=" + instance.latitude
+                + "," + instance.longitude;
+        mContext.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
     }
     public View getRootView(){
         return root;
