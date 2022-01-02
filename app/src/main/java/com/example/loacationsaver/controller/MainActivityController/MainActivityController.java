@@ -10,6 +10,8 @@ import com.example.loacationsaver.model.db.DatabaseModel;
 import com.example.loacationsaver.model.locations.LocationModel;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Objects;
+
 public class MainActivityController implements ActivityControllerInterface {
 
     DatabaseModel model;
@@ -46,14 +48,16 @@ public class MainActivityController implements ActivityControllerInterface {
     @Override
     public void OnClickSaveLocation(LatLng latLng) {
         try {
-            boolean isSuccess=model.saveLocation(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude), this.GetAddress(latLng));
-            if(isSuccess){
-                //view.UpdateView(model.getAllSavedLocation());
-                view.ShowSuccess("Successful");
+            if(model.saveLocation(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude), this.GetAddress(latLng))){
+                view.ShowSuccess("Saved");
             }
         } catch (Exception e) {
-            Log.d("Error",e.getMessage());
-            view.ShowError("Something went wrong");
+            if(Objects.equals(e.getMessage(), "Location Already Exists")){
+                view.ShowError("Location Already Exists");
+            }
+            else{
+                view.ShowError("Something went wrong");
+            }
         }
     }
 

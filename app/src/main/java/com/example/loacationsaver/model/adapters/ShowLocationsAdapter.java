@@ -1,6 +1,7 @@
 package com.example.loacationsaver.model.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loacationsaver.R;
+import com.example.loacationsaver.controller.LocationList.ListController;
 import com.example.loacationsaver.model.db.DatabaseModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -26,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +41,7 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
     ArrayList<LatLng> latlng;
     FusedLocationProviderClient client;
     Bundle mSavedInstance;
-    DatabaseModel model;
+    ListController controller;
     OnLocationClickListener mOnLocationClickListener;
 
     public ShowLocationsAdapter(Context context, ArrayList<String> address, ArrayList<LatLng> latlang,
@@ -48,7 +52,7 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
         client = LocationServices.getFusedLocationProviderClient(context);
         this.mSavedInstance=savedInstance;
         this.addressAll=new ArrayList<>(address);
-        this.model=new DatabaseModel(new LocationDBAdapter(context));
+        this.controller=new ListController(context);
         this.mOnLocationClickListener=onLocationClickListener;
     }
 
@@ -61,31 +65,29 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.address.setText(address.get(position));
-        LatLng instance = latlng.get(position);
-
+        holder.address.setText(address.get(holder.getAdapterPosition()));
+        LatLng instance = latlng.get(holder.getAdapterPosition());
         holder.mapview.onCreate(mSavedInstance);
-        holder.mapview.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
-                googleMap.addMarker(new MarkerOptions().position(instance));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(instance, 15));
-                googleMap.getUiSettings().setAllGesturesEnabled(false);
-                holder.mapview.onResume();
-            }
+        holder.mapview.getMapAsync(googleMap -> {
+            googleMap.addMarker(new MarkerOptions().position(instance));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(instance, 15));
+            googleMap.getUiSettings().setAllGesturesEnabled(false);
+            holder.mapview.onResume();
         });
         holder.delete.setOnClickListener(v -> {
-            try {
-                if(model.Delete(String.valueOf(instance.latitude),String.valueOf(instance.longitude))){
-                    address.remove(position);
-                    latlng.remove(position);
-                    addressAll.remove(position);
-                    notifyDataSetChanged();
-                    Toast.makeText(context,"Record Deleted",Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(context.getResources().getString(R.string.do_you_really_want_to_delete));
+            builder.setTitle(context.getResources().getString(R.string.confirm_delete));
+            builder.setCancelable(false);
+            builder.setNegativeButton(context.getResources().getString(R.string.cancel), (dialog, which) -> dialog.cancel());
+            builder.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Delete(instance,holder.getAdapterPosition());
                 }
-            } catch (Exception e) {
-                Toast.makeText(context,"Error deleting record. Try Again",Toast.LENGTH_SHORT).show();
-            }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
         });
     }
 
@@ -124,6 +126,22 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
             notifyDataSetChanged();
         }
     };
+
+    private void Delete(LatLng instance,int position){
+        try {
+            if(controller.DeleteLocations(String.valueOf(instance.latitude),String.valueOf(instance.longitude))){
+                address.remove(position);
+                latlng.remove(position);
+                addressAll.remove(position);
+                notifyDataSetChanged();
+                if(getItemCount()<=0){
+                    Toast.makeText(context,"No Locations Available",Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (Exception e) {
+            Toast.makeText(context,"Error deleting record. Try Again",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView address;

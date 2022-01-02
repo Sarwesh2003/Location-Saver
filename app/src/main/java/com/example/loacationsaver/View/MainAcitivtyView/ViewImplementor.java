@@ -1,12 +1,14 @@
 package com.example.loacationsaver.View.MainAcitivtyView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,11 +32,12 @@ import java.util.List;
 public class ViewImplementor implements MainActivityView {
 
     View root;
-    ExtendedFloatingActionButton btn_view_location,btn_save_location;
+    Button btn_view_location,btn_save_location;
     FloatingActionButton refresh;
     MainActivityController controller;
     Toolbar toolbar;
     ImageButton menu_btn,widget_btn;
+    ListFragment bottomSheet;
 
     ArrayAdapter<String> adapter;
 
@@ -48,13 +51,13 @@ public class ViewImplementor implements MainActivityView {
 
     @Override
     public void initView() {
-        UI();
         controller.onViewLoaded();
         menu_btn =  root.findViewById(R.id.menu_btn);
         widget_btn= root.findViewById(R.id.widget);
         refresh =  root.findViewById(R.id.recenter);
         btn_save_location= root.findViewById(R.id.save_location);
         btn_view_location= root.findViewById(R.id.view_location);
+        bottomSheet=new ListFragment();
         //Handle Click Events
         menu_btn.setOnClickListener(v -> CreatePopUpMenu());
         refresh.setOnClickListener(v -> controller.GetLocationUpdates());
@@ -67,8 +70,9 @@ public class ViewImplementor implements MainActivityView {
     }
 
     private void ShowBottomSheetDialogue(Context context) {
-        ListFragment bottomSheet=new ListFragment();
-        bottomSheet.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheet.getTag());
+        if(!bottomSheet.isAdded()){
+            bottomSheet.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheet.getTag());
+        }
     }
 
     public void ShowDialogue(String msg) {
@@ -82,8 +86,8 @@ public class ViewImplementor implements MainActivityView {
 
     @Override
     public void UI() {
-        RelativeLayout rl = root.findViewById(R.id.layout_map);
-        rl.setClipToOutline(true);
+        //RelativeLayout rl = root.findViewById(R.id.layout_map);
+        //rl.setClipToOutline(true);
     }
 
     @Override

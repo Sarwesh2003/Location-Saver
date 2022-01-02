@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button">#4169E1</color>
     <color name="Divider">#BDBDBD</color>
+    <color name="btn_back">#000000</color>
+    <color name="red">#DD352E</color>
+    <color name="close">#36454F</color>
 </resources>

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         view = new ViewImplementor(MainActivity.this, null);
         setContentView(view.getRootView());
-        setSupportActionBar(view.getToolbar());
+        //setSupportActionBar(view.getToolbar());
         view.initView();
     }
 

@@ -18,4 +18,8 @@
     <string name="popup_menu_CD">Popup Menu</string>
     <string name="widget_cd">Widget</string>
     <string name="api_key">AIzaSyD-rXjJAJD_6FcgmbC1_enzDKjYqEgwsio</string>
+    <string name="do_you_really_want_to_delete">The selected location will be deleted?</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="sure">Sure</string>
 </resources>

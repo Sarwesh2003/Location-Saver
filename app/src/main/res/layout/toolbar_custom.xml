@@ -4,50 +4,72 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:minHeight="?attr/actionBarSize"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-    <ImageButton
-        android:id="@+id/menu_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:paddingStart="7dp"
-        android:paddingEnd="7dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:layout_gravity="center_vertical|start"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:elevation="4dp"
-        android:src="@drawable/menu"
-        app:tint="@color/black"
-        android:contentDescription="@string/popup_menu_CD" />
+    android:background="@drawable/round_toolbar">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/menu_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/popup_menu_CD"
+            android:elevation="4dp"
+            android:padding="5dp"
+            android:src="@drawable/menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+        <TextView
+            android:id="@+id/title_mainscreen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="serif"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/menu_btn"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+            app:layout_constraintTop_toTopOf="@+id/menu_btn" />
 
-    <TextView
-        android:id="@+id/title_mainscreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="serif"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="26sp"
-        android:textStyle="bold|italic" />
-    <ImageButton
-        android:id="@+id/widget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:paddingStart="7dp"
-        android:paddingEnd="7dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:layout_gravity="end"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_alignParentEnd="true"
-        android:elevation="4dp"
-        android:src="@drawable/nav_widget_option_icon"
-        app:tint="@color/black"
-        android:contentDescription="@string/widget_cd" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+        <ImageButton
+            android:id="@+id/widget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/widget_cd"
+            android:elevation="4dp"
+            android:padding="5dp"
+            android:src="@drawable/nav_widget_option_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="@+id/title_mainscreen"
+            app:tint="@color/white" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>

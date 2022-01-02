@@ -22,8 +22,27 @@
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/layout/toolbar_cutom.xml" value="0.23731884057971014" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/menu/menu_items_custom.xml" value="0.259375" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/LoacationSaver/app/src/main/res/menu/xyz.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/accurate.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/delete.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/ic_close.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/ic_delete.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/ic_direction.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/ic_share.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/location_pin.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/location_pin_2.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/round.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/round_btn.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/round_layout.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/round_toolbar.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/drawable/share.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/bottom_sheet_design.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/details_design.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/location_details_design.xml" value="0.22735507246376813" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/location_list_design.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/layout/toolbar_custom.xml" value="0.259375" />
+        <entry key="..\:/Users/sarwe/Desktop/Tutorial/Projects/LoacationSaver/app/src/main/res/menu/menu_items_custom.xml" value="0.13385416666666666" />
       </map>
     </option>
   </component>

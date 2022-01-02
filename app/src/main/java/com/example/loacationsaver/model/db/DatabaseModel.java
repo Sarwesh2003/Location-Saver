@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.example.loacationsaver.model.adapters.LocationDBAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DatabaseModel {
     LocationDBAdapter db;
@@ -15,38 +16,29 @@ public class DatabaseModel {
         //locations=db.getSavedLocation();
     }
     public boolean saveLocation(String lat,String lang, String address) throws Exception{
-        boolean isSuccess=db.insert(lat,lang,address);
-        if(!isSuccess){
-            throw new Exception("Error Saving");
+
+        try{
+            if(db.insert(lat,lang,address)){
+                return true;
+            }
+        }catch (Exception e){
+            if(Objects.equals(e.getMessage(), "Location Already Saved")){
+                throw new Exception("Location Already Exists");
+            }
+            else{
+                throw new Exception("Something went wrong");
+            }
         }
-        else{
-            //refresh();
-        }
-        return isSuccess;
+        return false;
     }
-    public List<String> getAllSavedLocation()throws Exception{
-        if(this.locations!=null && this.locations.size()>0){
-            return this.locations;
-        }
-        else{
-            //refresh();
-            throw new Exception("No Records Found");
-        }
-    }
+
     public boolean Delete(String lat, String lang) throws  Exception{
         boolean isSuccess= db.Delete(lat,lang);
         if(!isSuccess){
             throw new Exception("Error while deleting");
         }
-        else{
-            //refresh();
-        }
         return isSuccess;
     }
-
-//    public void refresh(){
-//        locations=this.db.getSavedLocation();
-//    }
 
     public Cursor GetCursorForAllData(){
         return db.GetCursor();

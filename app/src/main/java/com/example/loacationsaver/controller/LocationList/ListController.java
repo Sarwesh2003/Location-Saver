@@ -2,7 +2,9 @@ package com.example.loacationsaver.controller.LocationList;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
+import com.example.loacationsaver.model.adapters.LocationDBAdapter;
 import com.example.loacationsaver.model.db.DatabaseModel;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -14,9 +16,9 @@ public class ListController {
     ArrayList<String> address;
     ArrayList<LatLng> latlang;
 
-    public ListController(Context mContext, DatabaseModel model) {
+    public ListController(Context mContext) {
         this.mContext = mContext;
-        this.model = model;
+        this.model = new DatabaseModel(new LocationDBAdapter(mContext));
     }
 
     public ArrayList<String> GetAddressInList(){
@@ -42,5 +44,17 @@ public class ListController {
             }
         }
         return latlang;
+    }
+    public boolean DeleteLocations(String lat,String lang) {
+        try {
+            boolean isSuccess= model.Delete(lat, lang);
+            if(isSuccess){
+                Toast.makeText(mContext,"Deleted",Toast.LENGTH_SHORT).show();
+                return isSuccess;
+            }
+        } catch (Exception e) {
+            Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }

@@ -4,6 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.loacationsaver.R;
@@ -25,7 +29,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -80,7 +87,7 @@ public class LocationModel {
         Task<Location> current = client.getLastLocation();
         current.addOnSuccessListener(location -> supportMapFragment.getMapAsync(googleMap -> {
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            AddMarkerToPos(latLng, googleMap);
+            AddMarkerToPos(latLng, googleMap,true);
         }));
         KeepUpdatingLocation();
     }
@@ -90,13 +97,20 @@ public class LocationModel {
         StartLocationService();
     }
 
-    public void AddMarkerToPos(LatLng latLng, GoogleMap googleMap) {
+    public void AddMarkerToPos(LatLng latLng, GoogleMap googleMap, boolean my_location) {
+        MarkerOptions options;
         if (marker != null) {
             marker.remove();
         }
-        MarkerOptions options = new MarkerOptions().position(latLng)
-                .title("You are here");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+        if(my_location){
+            options = new MarkerOptions().position(latLng)
+                    .title("You are here").icon(BitmapFromVector(context,R.drawable.location_pin));
+        }
+        else{
+            options = new MarkerOptions().position(latLng)
+                    .title("Saved Location");
+        }
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         marker = googleMap.addMarker(options);
     }
 
@@ -105,7 +119,6 @@ public class LocationModel {
             Log.d("Error here", "Returning form permission");
             return;
         }
-        Log.d("Error", "Near Callback");
         client.requestLocationUpdates(getConfig(), new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -113,7 +126,7 @@ public class LocationModel {
                 supportMapFragment.getMapAsync(googleMap -> {
                     for (Location locationUpdate : locationResult.getLocations()) {
                         LatLng latLng = new LatLng(locationUpdate.getLatitude(), locationUpdate.getLongitude());
-                        AddMarkerToPos(latLng, googleMap);
+                        AddMarkerToPos(latLng, googleMap,true);
                     }
                 });
             }
@@ -145,5 +158,13 @@ public class LocationModel {
         }
         return strAdd;
     }
-
+    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 }
+

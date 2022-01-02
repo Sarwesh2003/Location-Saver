@@ -38,18 +38,6 @@ public class LocationDBAdapter {
        }
 
     }
-    /*public List<String> getSavedLocation(){
-        List<String> locations=new ArrayList<>();
-        Cursor cursor=database.query(LocationDatabaseHelper.TABLE_NAME,new String[]{LocationDatabaseHelper.COLUMN_ADDRESS},null,null,null,null,null);
-        if(cursor!=null && cursor.getCount()>0){
-            while(cursor.moveToNext()){
-                String data = cursor.getString(2);
-                locations.add(String.valueOf(data));
-            }
-        }
-        Objects.requireNonNull(cursor).close();
-        return locations;
-    }*/
 
     public boolean Delete(String lat, String lang){
         return database.delete(LocationDatabaseHelper.TABLE_NAME,LocationDatabaseHelper.COLUMN_LATITUDE+" LIKE ? AND "+
