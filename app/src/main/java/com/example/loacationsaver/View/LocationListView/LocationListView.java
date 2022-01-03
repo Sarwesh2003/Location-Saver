@@ -58,7 +58,6 @@ public class LocationListView implements ShowLocationsAdapter.OnLocationClickLis
         GetData();
         adapter=new ShowLocationsAdapter(mContext,address,latlang,this,savedInstanceState);
         list.setAdapter(adapter);
-        list.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
     }
 
     private void GetData(){

@@ -98,9 +98,6 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
             StartShare(instance);
         });
 
-        holder.nav.setOnClickListener(v -> {
-            StartNavigation(instance);
-        });
     }
 
     @Override
@@ -158,7 +155,7 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView address;
         MapView mapview;
-        ImageButton delete,share,nav;
+        ImageButton delete,share;
         OnLocationClickListener onLocationClickListener;
 
 
@@ -169,7 +166,6 @@ public class ShowLocationsAdapter extends RecyclerView.Adapter<ShowLocationsAdap
             mapview=(MapView)itemView.findViewById(R.id.map_preview_fragment);
             delete=itemView.findViewById(R.id.delete);
             share=itemView.findViewById(R.id.share);
-            nav=itemView.findViewById(R.id.nav);
             RelativeLayout rl = itemView.findViewById(R.id.back);
             rl.setClipToOutline(true);
             mapview.setClickable(false);
