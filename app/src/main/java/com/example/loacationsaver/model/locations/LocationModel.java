@@ -166,5 +166,6 @@ public class LocationModel {
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+
 }
 

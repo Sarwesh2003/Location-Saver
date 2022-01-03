@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.loacationsaver">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +13,11 @@
         android:roundIcon="@mipmap/icon_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.LoacationSaver">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD-rXjJAJD_6FcgmbC1_enzDKjYqEgwsio"/>
+            android:value="AIzaSyD-rXjJAJD_6FcgmbC1_enzDKjYqEgwsio" />
+
         <activity
             android:name=".SplashScreen"
             android:exported="false" />
