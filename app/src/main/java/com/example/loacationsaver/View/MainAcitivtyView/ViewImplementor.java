@@ -2,9 +2,12 @@ package com.example.loacationsaver.View.MainAcitivtyView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -38,7 +41,7 @@ public class ViewImplementor implements MainActivityView {
     Toolbar toolbar;
     ImageButton menu_btn,widget_btn;
     ListFragment bottomSheet;
-
+    Context context;
     ArrayAdapter<String> adapter;
 
     public ViewImplementor(Context context, ViewGroup container) {
@@ -46,6 +49,7 @@ public class ViewImplementor implements MainActivityView {
         //List<String> list;
         DatabaseModel model = new DatabaseModel(LocationDBAdapter.getLocationInstance(context));
         LocationModel locationModel = new LocationModel(root.getContext());
+        this.context=context;
         controller = new MainActivityController(model, this, locationModel);
     }
 
@@ -67,6 +71,8 @@ public class ViewImplementor implements MainActivityView {
             controller.GetAddress(controller.GetLatLng());
             ShowBottomSheetDialogue(root.getContext());
         });
+
+
     }
 
     private void ShowBottomSheetDialogue(Context context) {
@@ -138,6 +144,10 @@ public class ViewImplementor implements MainActivityView {
 
     @Override
     public void ShareLocation() {
+        String uri = "https://github.com/Sarwesh2003/Location-Saver";
+        Intent sharingIntent = new Intent(Intent.ACTION_VIEW);
+        sharingIntent.setData(Uri.parse(uri));
+        context.startActivity(sharingIntent);
     }
 
     @Override
@@ -150,5 +160,17 @@ public class ViewImplementor implements MainActivityView {
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_items_custom, popup.getMenu());
         popup.show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.nav_share){
+                    ShareLocation();
+                }
+                else{
+                    Toast.makeText(root.getContext(), "Under Development",Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/close"
     tools:context=".SplashScreen">
 
 
@@ -38,7 +38,7 @@
             android:includeFontPadding="true"
             android:text="@string/app_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
             android:fontFamily="@font/baloo_bhai"
             android:text="@string/app_subtitle"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="#595858"
+            android:textColor="#C0C0C0"
             android:textSize="20sp"
             android:textStyle="italic" />
     </LinearLayout>

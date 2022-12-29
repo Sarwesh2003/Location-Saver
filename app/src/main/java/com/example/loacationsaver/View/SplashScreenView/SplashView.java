@@ -40,7 +40,7 @@ public class SplashView extends AppCompatActivity implements SplashInterface {
             Intent newActivity = new Intent(root.getContext(), MainActivity.class);
             newActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             root.getContext().startActivity(newActivity);
-        },2000);
+        },5000);
     }
     @Override
     public View getRootView() {
